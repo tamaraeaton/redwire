@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
 
 const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
+
+import { Stack, HomeStack, VideosStack } from './routes/stacks';
 
 import VideosScreen from './components/home/videos';
 import HomeScreen from './components/home/articles';
@@ -16,8 +17,8 @@ import AuthScreen from './components/auth';
 const MainDrawer = () => {
   return (
   <Drawer.Navigator>
-    <Drawer.Screen name="Home" component={HomeScreen}/>
-    <Drawer.Screen name="Videos" component={VideosScreen}/>
+    <Drawer.Screen name="Home" component={HomeStack}/>
+    <Drawer.Screen name="Videos" component={VideosStack}/>
   </Drawer.Navigator>
   )}
 
