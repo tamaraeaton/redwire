@@ -6,32 +6,34 @@ const VideosScreen = ({ navigation }) => {
 
     const renderVideos = () => {
         <Tile
-            imageSrc={'https://picsum.photos/200/300'}
-            title={'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'}
-        />
+        activeOpacity={0.5}
+        caption="Tile caption"
+        captionStyle={{}}
+        containerStyle={{}}
+        contentContainerStyle={{}}
+        height={300}
+        iconContainerStyle={{}}
+        imageContainerStyle={{}}
+        imageProps={{}}
+        // imageSrc="SampleImage"
+        onPress={() => console.log("imageProps()")}
+        overlayContainerStyle={{}}
+        titleStyle={{}}
+        width={400}
+    />
+ 
     }
 
     return (
         <ScrollView>
             <View>
                 <Text>Videos</Text>
-                <Tile
-                    activeOpacity={0.5}
-                    caption="Tile caption"
-                    captionStyle={{}}
-                    containerStyle={{}}
-                    contentContainerStyle={{}}
-                    height={300}
-                    iconContainerStyle={{}}
-                    imageContainerStyle={{}}
-                    imageProps={{}}
-                    imageSrc="SampleImage"
-                    onPress={() => console.log("imageProps()")}
-                    overlayContainerStyle={{}}
-                    titleStyle={{}}
-                    width={400}
-                />
-                {renderVideos()}
+                 <Tile
+             imageSrc={{uri:'https://picsum.photos/200/300'}}
+            title={'Here is the Video Screen. Bypassed the function for now.  Thank you Austin!'}
+        />
+ 
+                {/* {renderVideos()} */}
             </View>
             {/* <Button 
                 title="see video"
