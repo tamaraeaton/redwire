@@ -12,10 +12,10 @@ const HomeScreen = ({ navigation }) => {
     const renderCard = () => {
         return (
         <TouchableOpacity
-            onLongPress={()=>navigation.navigate('Article_screen'),{
+            onLongPress={()=>navigation.navigate('Article_screen',{
                 id:'1234',
                 postData: {title:'lkjlk', content: ''}
-            }}
+            })}
         >
             <Card>
                 <Card.Title style={styles.cardTitle}>
