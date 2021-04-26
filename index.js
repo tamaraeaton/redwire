@@ -17,11 +17,9 @@ const createStoreWithMiddleware = createStore(
 const reduxApp = () => {
     return (
     <Provider store={createStoreWithMiddleware}>
-        <PaperProvider
-            // theme='DarkTheme'
-        >
+        {/* <PaperProvider> */}
                     <App/>
-        </PaperProvider>
+        {/* </PaperProvider> */}
     </Provider>
     )}
 
