@@ -54,6 +54,9 @@ class App extends Component {
               </>
               :
               <Stack.Screen
+              options={{
+                headerShown:false
+              }}
                 name="AuthScreen"
                 component={AuthScreen}
               />

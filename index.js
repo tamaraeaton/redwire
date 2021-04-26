@@ -17,9 +17,9 @@ const createStoreWithMiddleware = createStore(
 const reduxApp = () => {
     return (
     <Provider store={createStoreWithMiddleware}>
-        {/* <PaperProvider> */}
+        <PaperProvider>
                     <App/>
-        {/* </PaperProvider> */}
+        </PaperProvider>
     </Provider>
     )}
 
