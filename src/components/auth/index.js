@@ -3,9 +3,10 @@ import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
+import Toast from 'react-native-toast-message';
 
 import { Input, Button } from 'react-native-elements';
-import { LogoText, Colors } from '../../utils/tools';
+import { LogoText, Colors, showToast } from '../../utils/tools';
 import ArticleScreen from '../home/articles/article';
 
 const AuthScreen = () => {
@@ -16,6 +17,10 @@ const AuthScreen = () => {
     const handleSubmit = (values) => {
         ArticleScreen(values)
     }
+
+    useEffect(() => {
+        // showToast('success', 'sorry', 'error msg')
+    }, [])
 
     return (
         <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -72,18 +77,18 @@ const AuthScreen = () => {
                                     marginTop: 20
                                 }}
                                 titleStyle={{ width: '100%' }}
-                                // onPress={}
-                                // loading={}
+                            // onPress={}
+                            // loading={}
                             />
                             <Button
-                                title={formType ? 'Register' : 'Login'}
+                                type='clear'
+                                title={`${!formType ? 'Already Registered?' : 'Need to sign in?'}`}
                                 buttonStyle={{
-                                    backgroundColor: Colors.black,
                                     marginTop: 20
                                 }}
-                                titleStyle={{ width: '100%' }}
-                                // onPress={}
-                                // loading={}
+                                titleStyle={{ width: '100%', color: Colors.white }}
+                                onPress={() => setFormType(!formType)}
+                            // loading={}
                             />
                         </>
                     )}
