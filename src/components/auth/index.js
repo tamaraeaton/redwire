@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView, Text } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../../store/actions';
 import Toast from 'react-native-toast-message';
 
 import { Input, Button } from 'react-native-elements';
@@ -10,12 +11,18 @@ import { LogoText, Colors, showToast } from '../../utils/tools';
 import ArticleScreen from '../home/articles/article';
 
 const AuthScreen = () => {
+    const dispatch = useDispatch();
 
     const [formType, setFormType] = useState(true)
     const [secureEntry, setSecureEntry] = useState(true)
 
     const handleSubmit = (values) => {
-        ArticleScreen(values)
+        if (formType) {
+            // register
+            dispatch(registerUser(values));
+        } else {
+            // sign in
+        }
     }
 
     useEffect(() => {
@@ -52,7 +59,7 @@ const AuthScreen = () => {
 
                                 renderErrorMessage={errors.email && touched.email}
                                 errorMessage={errors.email}
-                                errorStyle={{color: Colors.black}}
+                                errorStyle={{ color: Colors.black }}
 
                                 onChangeText={handleChange('email')}
                                 onBlur={handleBlur('email')}
@@ -70,10 +77,10 @@ const AuthScreen = () => {
                                     name: secureEntry ? 'eye' : 'eyeo',
                                     onPress: () => setSecureEntry(!secureEntry)
                                 }}
-                                
+
                                 renderErrorMessage={errors.password && touched.password}
                                 errorMessage={errors.password}
-                                errorStyle={{color: Colors.black}}
+                                errorStyle={{ color: Colors.black }}
 
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
