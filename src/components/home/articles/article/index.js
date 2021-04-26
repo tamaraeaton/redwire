@@ -7,8 +7,10 @@ import {
 
 import ContentShow from '../../../../utils/contentShow';
 const image = require('./imageTest.jpg')
+
 const ArticleScreen = () => {
     return (
+
         <ScrollView>
             <View>
                 <Image
@@ -19,6 +21,7 @@ const ArticleScreen = () => {
                 <ContentShow />
             </View>
         </ScrollView>
+
     )
 }
 export default ArticleScreen;

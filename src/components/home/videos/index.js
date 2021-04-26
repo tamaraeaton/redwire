@@ -1,39 +1,31 @@
 import React from 'react';
-import { View, Text, Button, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, Button, ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
 import { Tile } from 'react-native-elements';
 
 const VideosScreen = ({ navigation }) => {
 
     const renderVideos = () => {
-        <Tile
-        activeOpacity={0.5}
-        caption="Tile caption"
-        captionStyle={{}}
-        containerStyle={{}}
-        contentContainerStyle={{}}
-        height={300}
-        iconContainerStyle={{}}
-        imageContainerStyle={{}}
-        imageProps={{}}
-        // imageSrc="SampleImage"
-        onPress={() => console.log("imageProps()")}
-        overlayContainerStyle={{}}
-        titleStyle={{}}
-        width={400}
-    />
- 
+        return (
+            <Tile
+                imageSrc={{ uri: 'https://picsum.photos/200/300' }}
+                title={'Lorem ipsum dolor sit amet, consectetur adipiscing elit'}
+                icon={{name:'play-circle', type:'font-awesome', color:'#fff',size:50, marginTop:70}}
+                contentContainerStyle={styles.contentContainerStyle}
+                containerStyle={styles.containerStyle}
+                titleStyle={{fontSize:15}}
+                onPress={()=>navigation.navigate('Video_screen',{
+                    id:'123',
+                    postData:{}
+                })}
+            />
+        )
     }
 
     return (
         <ScrollView>
-            <View>
+            <View style={{padding:20}}>
                 <Text>Videos</Text>
-                 <Tile
-             imageSrc={{uri:'https://picsum.photos/200/300'}}
-            title={'Here is the Video Screen. Bypassed the function for now.  Thank you Austin!'}
-        />
- 
-                {/* {renderVideos()} */}
+                {renderVideos()}
             </View>
             {/* <Button 
                 title="see video"
@@ -42,5 +34,19 @@ const VideosScreen = ({ navigation }) => {
         </ScrollView>
     )
 }
+
+const styles = StyleSheet.create({
+    contentContainerStyle: {
+        backgroundColor:'#fff',
+        borderWidth:1,
+        borderColor:'#e1e8ee',
+        shadowColor:'rgba(0, 0, 0, .2)'
+    },
+    containerStyle: {
+        width: '100%',
+        height:250,
+        marginBottom:15
+    }
+})
 
 export default VideosScreen;
