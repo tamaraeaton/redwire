@@ -27,7 +27,7 @@ const AuthScreen = () => {
             <View style={styles.container}>
                 <LogoText style={{ fontSize: 45 }} />
                 <Formik
-                    initialValues={{ email: 'tamara@gmail.com', password: '123456' }}
+                    initialValues={{ email: '', password: '' }}
                     validationSchema={Yup.object({
                         email: Yup.string()
                             .email('Invalid email address')
@@ -50,6 +50,10 @@ const AuthScreen = () => {
                                 placeholderTextColor={Colors.grey}
                                 inputContainerStyle={styles.inputContainerStyle}
 
+                                renderErrorMessage={errors.email && touched.email}
+                                errorMessage={errors.email}
+                                errorStyle={{color: Colors.black}}
+
                                 onChangeText={handleChange('email')}
                                 onBlur={handleBlur('email')}
                                 value={values.email}
@@ -66,6 +70,11 @@ const AuthScreen = () => {
                                     name: secureEntry ? 'eye' : 'eyeo',
                                     onPress: () => setSecureEntry(!secureEntry)
                                 }}
+                                
+                                renderErrorMessage={errors.password && touched.password}
+                                errorMessage={errors.password}
+                                errorStyle={{color: Colors.black}}
+
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
                                 value={values.password}
@@ -77,7 +86,7 @@ const AuthScreen = () => {
                                     marginTop: 20
                                 }}
                                 titleStyle={{ width: '100%' }}
-                            // onPress={}
+                                onPress={handleSubmit}
                             // loading={}
                             />
                             <Button
