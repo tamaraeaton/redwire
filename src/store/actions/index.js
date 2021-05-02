@@ -6,6 +6,12 @@ export const registerUser = (values) => ({
     payload: api.registerUser(values)
 })
 
+export const loginUser = (values) => ({
+    type:'AUTH_USER',
+    payload: api.loginUser(values)
+})
+
 export const clearAuthError = () => ({
     type:'CLEAR_AUTH_ERROR'
 })
+
