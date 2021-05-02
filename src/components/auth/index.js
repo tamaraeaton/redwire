@@ -3,18 +3,21 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../../store/actions';
+import { registerUser, clearAuthError } from '../../store/actions';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { Input, Button } from 'react-native-elements';
 import { LogoText, Colors, showToast } from '../../utils/tools';
 
 const AuthScreen = () => {
     const dispatch = useDispatch();
-
+    const error = useSelector(state => state.auth.error);
     const [formType, setFormType] = useState(true)
-    const [secureEntry, setSecureEntry] = useState(true)
+    const [secureEntry, setSecureEntry] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = (values) => {
+        setLoading(true)
         if (formType) {
             // alert(values)
             // register
@@ -25,8 +28,19 @@ const AuthScreen = () => {
     }
 
     useEffect(() => {
+        if(error) {
+            console.log(error)
+            showToast('success', 'Sorry', error)
+            setLoading(false)
+        }
         // showToast('success', 'sorry', 'error msg')
-    }, [])
+    }, [error])
+
+    useFocusEffect(
+        useCallback(() => {
+            return () => dispatch(clearAuthError())
+        }, [])
+    )
 
     return (
         <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -39,7 +53,7 @@ const AuthScreen = () => {
                             .email('Invalid email address')
                             .required('The email is required'),
                         password: Yup.string()
-                            .max(10, 'Must be 10 or less')
+                            .max(10, 'Must be 20 or less')
                             .required('The last name is required'),
 
                     })}
@@ -93,7 +107,7 @@ const AuthScreen = () => {
                                 }}
                                 titleStyle={{ width: '100%' }}
                                 onPress={handleSubmit}
-                            // loading={}
+                                loading={loading}
                             />
                             <Button
                                 type='clear'

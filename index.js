@@ -18,19 +18,19 @@ const createStoreWithMiddleware = createStore(
 
 
 const toastConfig = {
-    info: (internalState) => {
-        <View style={{height:60,width:'100%',backgroundColor:'pink'}}>
-            <Text>{internalState.text1}</Text>
-        </View>
-    }
-};
+    info: (internalState) => (
+      <View style={{ height: 60, width: '100%', backgroundColor: 'pink' }}>
+        <Text>{internalState.text1}</Text>
+      </View>
+    )
+}
 
 const reduxApp = () => {
     return (
     <Provider store={createStoreWithMiddleware}>
         <PaperProvider>
             <App/>
-            <Toast config={toastConfig} ref={(ref) => Toast.setRef(ref)}/>
+            <Toast config={toastConfig} ref={(ref) => Toast.setRef(ref)} />
         </PaperProvider>
     </Provider>
     )}
