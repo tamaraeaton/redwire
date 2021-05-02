@@ -30,7 +30,7 @@ export const showToast = (type, text1, text2) => {
                 text1,
                 text2,
                 position: 'bottom',
-                visilibityTime:4000,
+                visilibityTime:1000,
                 autoHide:true,
                 bottomOffset:50
             })
@@ -41,7 +41,7 @@ export const showToast = (type, text1, text2) => {
                 text1,
                 text2,
                 position: 'bottom',
-                visilibityTime:4000,
+                visilibityTime:1000,
                 autoHide:true,
                 bottomOffset:50
             })

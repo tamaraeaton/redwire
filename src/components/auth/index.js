@@ -1,14 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Text } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../../store/actions';
-import Toast from 'react-native-toast-message';
 
 import { Input, Button } from 'react-native-elements';
 import { LogoText, Colors, showToast } from '../../utils/tools';
-import ArticleScreen from '../home/articles/article';
 
 const AuthScreen = () => {
     const dispatch = useDispatch();
@@ -18,6 +16,7 @@ const AuthScreen = () => {
 
     const handleSubmit = (values) => {
         if (formType) {
+            // alert(values)
             // register
             dispatch(registerUser(values));
         } else {
