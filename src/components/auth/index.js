@@ -47,7 +47,7 @@ const AuthScreen = () => {
             <View style={styles.container}>
                 <LogoText style={{ fontSize: 45 }} />
                 <Formik
-                    initialValues={{ email: '', password: '' }}
+                    initialValues={{ email: 'test1@gmail.com', password: '123456' }}
                     validationSchema={Yup.object({
                         email: Yup.string()
                             .email('Invalid email address')
