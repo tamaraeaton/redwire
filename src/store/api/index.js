@@ -48,3 +48,7 @@ export const autoSignIn = () => (
         })
     })
 )
+
+export const logoutUser = () => (
+    firebase.auth().signOut()
+)
