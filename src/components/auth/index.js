@@ -19,7 +19,6 @@ const AuthScreen = () => {
     const handleSubmit = (values) => {
         setLoading(true)
         if (formType) {
-            // alert(values)
             // register
             dispatch(registerUser(values));
         } else {

@@ -27,10 +27,24 @@ export const loginUser = async({ email,password }) => {
 
         const userProfile = await usersCollection.doc(response.user.uid).get();
         const data = userProfile.data();
-        
+
         return { isAuth:true, user:data }
 
     } catch(error) {
         return {error:error.message}
     }
 }
+
+export const autoSignIn = () => (
+    new Promise((resolve,reject)=>{
+        firebase.auth().onAuthStateChanged( user => {
+            if(user){
+                usersCollection.doc(user.uid).get().then( snapshot =>{
+                    resolve({ isAuth: true, user: snapshot.data() })
+                })
+            } else {
+                resolve({ isAuth: false, user:[] })
+            }
+        })
+    })
+)

@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { connect } from 'react-redux';
+import {autoSignIn} from './store/actions';
 import { StyleSheet, Text, View } from 'react-native';
 import SideDrawerCustom from './utils/customDrawer';
 import { Colors } from './utils/tools';
@@ -15,6 +16,7 @@ import { Stack, HomeStack, VideosStack, screenOptions } from './routes/stacks';
 import AuthScreen from './components/auth';
 import ProfileScreen from './components/user/profile/profile';
 import VideoScreen from './components/home/videos/video';
+import Splash from './components/auth/splash';
 
 
 const MainDrawer = () => {
@@ -31,12 +33,22 @@ const MainDrawer = () => {
 }
 
 class App extends Component {
+  state = {
+    loading:true
+  }
+
+  componentDidMount(){
+    this.props.dispatch(autoSignIn()).then(()=>{
+      this.setState({loading:false})
+    })
+  }
+
   render() {
     return (
       <SafeAreaProvider>
         <NavigationContainer>
           <Stack.Navigator>
-            {this.props.auth.isAuth ?
+            {this.props.auth.isAuth ? (
               <>
                 <Stack.Screen
                   name="Main"
@@ -47,11 +59,21 @@ class App extends Component {
                   name="VideoScreen"
                   component={VideoScreen} 
                   options={{
-                    ...screenOptions
+                    ...screenOptions,
+                    headerBackTitleVisible:false
                   }}
                   
                   />
               </>
+            ):(
+              this.state.loading ?
+              <Stack.Screen
+              options={{
+                headerShown:false
+              }}
+                name="Splash"
+                component={Splash}
+              />
               :
               <Stack.Screen
               options={{
@@ -60,7 +82,8 @@ class App extends Component {
                 name="AuthScreen"
                 component={AuthScreen}
               />
-            }
+
+            )}
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>
