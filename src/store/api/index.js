@@ -1,4 +1,4 @@
-import { firebase, usersCollection } from '../../firebase';
+import { firebase, usersCollection, articlesCollection } from '../../firebase';
 
 export const registerUser = async({ email,password }) => {
     try {
@@ -67,5 +67,25 @@ export const updateUserData = async(values,user) => {
 
     } catch(error) {
         return { user:user, error:error }
+    }
+}
+
+/// articles
+
+export const getArticles = async() => {
+    try{
+        const response = await articlesCollection
+        .where('public', '==', 1)
+        .orderBy('createdAt')
+        .limit(4)
+        .get();
+
+        const articles = response.docs.map( doc => ({
+            id: doc.id,...doc.data()
+        }));
+        return { posts:articles }
+    }catch(error){
+        console.log(error)
+        return error
     }
 }

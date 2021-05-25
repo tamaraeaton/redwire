@@ -1,13 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { 
     View, Text, 
     Button, ScrollView, 
-    TouchableOpacity, StyleSheet 
+    TouchableOpacity, StyleSheet
 } from 'react-native';
 import { Card } from 'react-native-elements';
+import { useDispatch, useSelector } from 'react-redux';
+import {getArticles} from '../../../store/actions';
 
-
+    
 const HomeScreen = ({ navigation }) => {
+    const articles = useSelector(state => state.articles)
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(getArticles())
+    },[dispatch])
 
     const renderCard = () => {
         return (
@@ -35,6 +43,9 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <ScrollView>
+            {renderCard()}
+            {renderCard()}
+            {renderCard()}
             {renderCard()}
             {renderCard()}
             {renderCard()}

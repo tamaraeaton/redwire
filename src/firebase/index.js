@@ -3,13 +3,13 @@ import 'firebase/firestore';
 import'firebase/auth';
 
 const config = {
-    apiKey: "AIzaSyB4esjS7IJ7IXLmh0YsrxooE8eENDyp6c4",
-    authDomain: "redwire-311916.firebaseapp.com",
-    projectId: "redwire-311916",
-    storageBucket: "redwire-311916.appspot.com",
-    messagingSenderId: "982925320889",
-    appId: "1:982925320889:web:8f97b7cef60a2d50f7b168",
-    measurementId: "G-L4M1Q7YE1C"
+    apiKey: "AIzaSyDv_YjzDU3Nn_XAh6eKn6kcTHbzld3C7cw",
+    authDomain: "redwire-f6472.firebaseapp.com",
+    projectId: "redwire-f6472",
+    storageBucket: "redwire-f6472.appspot.com",
+    messagingSenderId: "1094198136746",
+    appId: "1:1094198136746:web:26282b1da660adb75065d3",
+    measurementId: "G-H450V884M6"
 }
 
 firebase.initializeApp(config);
@@ -20,5 +20,10 @@ firebase.firestore().settings({ experimentalForceLongPolling: true });
 
 const DB = firebase.firestore();
 const usersCollection = DB.collection('users');
+const articlesCollection = DB.collection('articles');
 
-export {firebase, usersCollection}
+export {
+    firebase, 
+    usersCollection, 
+    articlesCollection
+}
