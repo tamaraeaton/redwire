@@ -1,68 +1,63 @@
-import React, {useEffect} from 'react';
-import { 
-    View, Text, 
-    Button, ScrollView, 
+import React, { useEffect } from 'react';
+import {
+    View, Text,
+    Button, ScrollView,
     TouchableOpacity, StyleSheet
 } from 'react-native';
 import { Card } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
-import {getArticles} from '../../../store/actions';
+import { getArticles } from '../../../store/actions';
 
-    
+
 const HomeScreen = ({ navigation }) => {
     const articles = useSelector(state => state.articles)
     const dispatch = useDispatch()
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getArticles())
-    },[dispatch])
+    }, [dispatch])
 
-    const renderCard = () => {
-        return (
-        <TouchableOpacity
-            onLongPress={()=>navigation.navigate('Article_screen',{
-                id:'1234',
-                postData: {title:'lkjlk', content: ''}
-            })}
-        >
-            <Card>
-                <Card.Title style={styles.cardTitle}>
-                    <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit.</Text>
-                </Card.Title>
-           
-            <Card.Divider/>
-            <Text style={styles.cardText}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-            molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-            numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-            optio, eaque rerum! Provident similique accusantium nemo autem.
+    const renderCard = () => (
+        articles.posts.map((item) => (
+            <TouchableOpacity
+            key={item.id}
+                onLongPress={() => navigation.navigate('Article_screen', {
+                    id: item.id,
+                    postData: item
+                })}
+            >
+                <Card>
+                    <Card.Title style={styles.cardTitle}>
+                        <Text>{item.title}</Text>
+                    </Card.Title>
+
+                    <Card.Divider />
+                    <Text style={styles.cardText}>{item.excerpt}
             </Text>
-            </Card>
-        </TouchableOpacity>
-        )}
+                </Card>
+            </TouchableOpacity>
+        ))
+    )
 
     return (
         <ScrollView>
-            {renderCard()}
-            {renderCard()}
-            {renderCard()}
-            {renderCard()}
-            {renderCard()}
-            {renderCard()}
-            {renderCard()}
-            {renderCard()}
+            { articles && articles.posts ?
+            renderCard()
+            :null
+            }
+
         </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    cardTitle:{
-        fontSize:20,
-        textAlign:'left'
+    cardTitle: {
+        fontSize: 20,
+        textAlign: 'left'
     },
-    cardText:{
-        marginBottom:10,
-        marginTop:10
+    cardText: {
+        marginBottom: 10,
+        marginTop: 10
     }
 })
 

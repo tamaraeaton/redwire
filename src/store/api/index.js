@@ -80,10 +80,12 @@ export const getArticles = async() => {
         .limit(4)
         .get();
 
+        const lastPostVisible = response.docs[response.docs.length-1]
+
         const articles = response.docs.map( doc => ({
             id: doc.id,...doc.data()
         }));
-        return { posts:articles }
+        return { posts:articles, lastPostVisible: lastPostVisible }
     }catch(error){
         console.log(error)
         return error
