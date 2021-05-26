@@ -36,3 +36,8 @@ export const getArticles = () => ({
     type:'GET_ARTICLES',
     payload: api.getArticles()
 })
+
+export const getMoreArticles = (articles) => ({
+    type:'GET_ARTICLES',
+    payload: api.getMoreArticles(articles)
+})

@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 import { firebase, usersCollection, articlesCollection } from '../../firebase';
 
 export const registerUser = async({ email,password }) => {
@@ -77,7 +78,7 @@ export const getArticles = async() => {
         const response = await articlesCollection
         .where('public', '==', 1)
         .orderBy('createdAt')
-        .limit(4)
+        .limit(3)
         .get();
 
         const lastPostVisible = response.docs[response.docs.length-1]
@@ -89,5 +90,32 @@ export const getArticles = async() => {
     }catch(error){
         console.log(error)
         return error
+    }
+}
+
+export const getMoreArticles = async(articles) => {
+    let posts = [...articles.posts]
+    let lastPostVisible = articles.lastPostVisible
+
+    try {
+        if(lastPostVisible){
+            const response = await articlesCollection
+            .where('public', '==', 1)
+            .orderBy('createdAt')
+            .startAfter(lastPostVisible)
+            .limit(2)
+            .get();
+
+            lastPostVisible = response.docs[response.docs.length-1]
+            const newArticles = response.docs.map( doc => ({
+                id: doc.id,...doc.data()
+            }));
+            return {posts:[...articles.posts, ...newArticles], lastPostVisible}
+
+        }
+        return {posts, lastPostVisible}
+    } catch(error){
+        alert(error)
+        return {posts, lastPostVisible}
     }
 }
