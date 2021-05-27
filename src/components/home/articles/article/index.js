@@ -9,20 +9,22 @@ import {
 // import * from 'react-native-elements';
 
 import ContentShow from '../../../../utils/contentShow';
+import {useRoute} from '@react-navigation/native'
 
 // const image = require('./imageTest.jpg')
 
 const ArticleScreen = () => {
+    const {params} = useRoute();
     return (
 
         <ScrollView>
             <View>
                 <Image
-                    source={{ uri: 'https://picsum.photos/200/300.jpg' }}
+                    source={{ uri: params.postData.image }}
                     style={{ width: '100%', height: 200 }}
                     PlaceholderContent={<ActivityIndicator />}
                 />
-                <ContentShow />
+                <ContentShow params={params}/>
             </View>
         </ScrollView>
 

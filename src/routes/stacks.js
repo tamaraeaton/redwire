@@ -57,7 +57,8 @@ export const HomeStack = () => {
     return (
         <Stack.Navigator
             screenOptions={{
-                ...screenOptions
+                ...screenOptions,
+                headerBackTitleVisible:false
             }}
             initialRouteName="Home_screen"
         >
